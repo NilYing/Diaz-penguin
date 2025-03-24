@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridal Car Services - Penguin Sales & Services</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+        }
+
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links > a, .dropdown-trigger {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-arrow {
+            stroke: #D49A41;
+            transition: transform 0.3s ease;
+            min-width: 16px;
+        }
+
+        .dropdown:hover .dropdown-trigger {
+            color: #D49A41;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #000;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+            border: 1px solid #333;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #222;
+            color: #D49A41;
+        }
+
+        .dropdown-trigger.active,
+        .dropdown-content a.active {
+            color: #D49A41;
+        }
+
+        .nav-links > a:hover, 
+        .dropdown-trigger:hover {
+            color: #D49A41;
+        }
+
+        .search-container {
+            max-width: 250px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 1.5rem;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: white;
+            color: #000;
+        }
+
+        .search-bar::placeholder {
+            color: #666;
+        }
+
+        .search-bar:focus {
+            border-color: #D49A41;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+
+        .menu-button {
+            display: block;
+            background: none;
+            border: none;
+            padding: 0.8rem;
+            cursor: pointer;
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        .nav-toggle,
+        .search-toggle {
+            display: none;
+        }
+
+        .search-toggle-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .dropdown-toggle {
+            display: none;
+        }
+
+        .bridal-hero {
+            min-height: 60vh;
+            padding: 8rem 1rem 4rem;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1525772764200-be829a350797?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .package-info {
+            background-color: #fff;
+            padding: 4rem 1rem;
+        }
+
+        .package-container {
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        .package-title {
+            font-size: 2.5rem;
+            color: #000;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .package-details {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            margin-bottom: 3rem;
+        }
+
+        .package-details ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-details li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .package-details li::before {
+            content: "•";
+            color: #D49A41;
+            font-size: 1.5rem;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            color: #D49A41;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .contact-info {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #fff;
+            border: 2px solid #D49A41;
+            border-radius: 8px;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-color: #D49A41;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .car-card:hover .car-image {
+            transform: scale(1.05);
+        }
+
+        .car-details {
+            padding: 1.5rem;
+        }
+
+        .car-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+
+        .car-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            line-height: 1.4;
+        }
+
+        .car-price {
+            color: #D49A41;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #D49A41;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .bridal-hero {
+                min-height: 50vh;
+                padding: 6rem 1rem 3rem;
+            }
+
+            .package-title {
+                font-size: 2rem;
+            }
+
+            .cars-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            .car-image {
+                height: 180px;
+            }
+
+            .car-details {
+                padding: 1rem;
+            }
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-link:hover {
+            opacity: 0.9;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 1023px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .nav-right {
+                gap: 0.5rem;
+            }
+
+            .search-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                background: #000;
+                border-top: 1px solid #333;
+            }
+
+            .search-toggle-label {
+                display: block;
+            }
+
+            .search-toggle:checked ~ .search-container {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: 0;
+                background: #000;
+                width: 280px;
+                height: calc(100vh - 72px);
+                padding: 1rem 0;
+                border-left: 1px solid #333;
+                border-radius: 0;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                align-items: stretch;
+                overflow-y: auto;
+            }
+
+            .nav-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
+            .nav-toggle:checked ~ .menu-button svg {
+                stroke: #D49A41;
+            }
+
+            .dropdown-trigger {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                border-bottom: 1px solid #333;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+                background: #111;
+                display: none;
+            }
+
+            .dropdown-toggle:checked ~ .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                padding: 0.875rem 2.5rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #222;
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+
+            .dropdown-content a.active {
+                border-left: 3px solid #D49A41;
+                padding-left: calc(2.5rem - 3px);
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            .menu-button,
+            .search-toggle-label {
+                display: none;
+            }
+
+            .search-container {
+                display: block !important;
+            }
+
+            .nav-links {
+                display: flex !important;
+            }
+
+            .dropdown-trigger {
+                padding: 0.5rem 0;
+                width: auto;
+            }
+
+            .dropdown:hover .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        .dropdown-content,
+        .nav-links,
+        .dropdown-arrow {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="landingpage.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Penguin Logo">
+                    <span class="logo-text">Penguin Sales & Services Company</span>
+                </div>
+            </a>
+
+            <div class="nav-right">
+                <input type="checkbox" id="search-toggle" class="search-toggle">
+                <label for="search-toggle" class="search-toggle-label">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </label>
+
+                <div class="search-container">
+                    <input type="search" class="search-bar" placeholder="Search services..." aria-label="Search">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="menu-button" aria-label="Toggle menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M3 12h18M3 18h18"></path>
+                    </svg>
+                </label>
+
+                <div class="nav-links">
+                    <div class="dropdown">
+                        <span class="dropdown-trigger active">
+                            Services
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="bridalCarsServices.html" class="active">Bridal Car Services</a>
+                            <a href="towingServices.html">Towing Services 24/7</a>
+                            <a href="truckingServices.html">Trucking Services</a>
+                            <a href="equipmenRental.html">Heavy Equipment Rental</a>
+                            <a href="constructionServices.html">Construction & Maintenance</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <span class="dropdown-trigger">
+                            Sales
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="furnitureSolutions.html">Furniture Hotel & Residential</a>
+                            <a href="autoparts.html">Auto Parts</a>
+                        </div>
+                    </div>
+
+                    <a href="landingpage.html#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="bridal-hero">
+        <div class="container">
+            <h1>Luxury Bridal Car Services</h1>
+            <p>Make your special day even more memorable</p>
+        </div>
+    </section>
+
+    <section class="package-info">
+        <div class="package-container">
+            <h2 class="package-title">Our Premium Bridal Car Package</h2>
+            
+            <div class="package-details">
+                <ul>
+                    <li>Bouquet of flowers</li>
+                    <li>VIP blinkers</li>
+                    <li>Driver in semi formal attire</li>
+                    <li>From hotel to ceremony</li>
+                    <li>From ceremony to reception</li>
+                    <li>First 3 hours rate</li>
+                    <li>Additional fee is applicable in excess of 3 hours</li>
+                </ul>
+                
+                <div class="price-tag">Starting at ₱4,000.00 for BMW E39</div>
+                
+                <div class="contact-info">
+                    <p>For booking assistance, contact: <strong>(0923) 086 8342</strong></p>
+                    <p><small>Price is subject to change without prior notice.</small></p>
+                    <a href="https://www.facebook.com/tagaytaybridalcar/" class="social-link" target="_blank">
+                        Follow us on Facebook for more updates
+                    </a>
+                </div>
+            </div>
+
+            <h2 class="package-title">Our Bridal Car Fleet</h2>
+            <div class="cars-grid">
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="BMW E39" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">BMW E39</h3>
+                        <p class="car-description">Classic luxury sedan perfect for weddings</p>
+                        <p class="car-price">From ₱4,000.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c" alt="Mercedes-Benz S-Class" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Mercedes-Benz S-Class</h3>
+                        <p class="car-description">Ultimate luxury and comfort</p>
+                        <p class="car-price">From ₱5,500.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a" alt="Chrysler 300C" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Chrysler 300C</h3>
+                        <p class="car-description">Bold and elegant American luxury</p>
+                        <p class="car-price">From ₱4,500.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935" alt="Jaguar XJ" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Jaguar XJ</h3>
+                        <p class="car-description">British elegance and sophistication</p>
+                        <p class="car-price">From ₱5,000.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938" alt="Audi A8" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Audi A8</h3>
+                        <p class="car-description">Modern luxury with cutting-edge technology</p>
+                        <p class="car-price">From ₱5,500.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888" alt="Rolls-Royce Ghost" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Rolls-Royce Ghost</h3>
+                        <p class="car-description">The ultimate in wedding luxury</p>
+                        <p class="car-price">From ₱8,000.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" alt="Bentley Flying Spur" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Bentley Flying Spur</h3>
+                        <p class="car-description">Handcrafted luxury and performance</p>
+                        <p class="car-price">From ₱7,500.00</p>
+                    </div>
+                </div>
+
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8" alt="Mercedes-Benz E-Class" class="car-image">
+                    <div class="car-details">
+                        <h3 class="car-name">Mercedes-Benz E-Class</h3>
+                        <p class="car-description">Executive comfort and style</p>
+                        <p class="car-price">From ₱4,500.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer" id="contact">
+    </footer>
+</body>
+</html>

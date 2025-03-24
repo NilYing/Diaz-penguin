@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Parts - Penguin Sales & Services</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+        }
+
+        /* Navbar styles */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-link:hover {
+            opacity: 0.9;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links > a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #333;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > a:hover {
+            color: #D49A41;
+            background-color: #111;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            display: none;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-arrow {
+            stroke: #D49A41;
+            transition: transform 0.3s ease;
+            min-width: 16px;
+        }
+
+        .dropdown:hover .dropdown-trigger {
+            color: #D49A41;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #000;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+            border: 1px solid #333;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #222;
+            color: #D49A41;
+        }
+
+        .search-container {
+            max-width: 250px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 1.5rem;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: white;
+            color: #000;
+        }
+
+        .search-bar::placeholder {
+            color: #666;
+        }
+
+        .search-bar:focus {
+            border-color: #D49A41;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+
+        .menu-button {
+            display: block;
+            background: none;
+            border: none;
+            padding: 0.8rem;
+            cursor: pointer;
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        .nav-toggle,
+        .search-toggle {
+            display: none;
+        }
+
+        .search-toggle-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Active states */
+        .dropdown-trigger.active {
+            color: #D49A41;
+        }
+
+        .dropdown-content a.active {
+            color: #D49A41;
+            background-color: rgba(212, 154, 65, 0.1);
+            pointer-events: none;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 1023px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .nav-right {
+                gap: 0.5rem;
+            }
+
+            .search-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                background: #000;
+                border-top: 1px solid #333;
+            }
+
+            .search-toggle-label {
+                display: block;
+            }
+
+            .search-toggle:checked ~ .search-container {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: 0;
+                background: #000;
+                width: 280px;
+                height: calc(100vh - 72px);
+                padding: 1rem 0;
+                border-left: 1px solid #333;
+                border-radius: 0;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                align-items: stretch;
+                overflow-y: auto;
+            }
+
+            .nav-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
+            .nav-toggle:checked ~ .menu-button svg {
+                stroke: #D49A41;
+            }
+
+            .dropdown-trigger {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                border-bottom: 1px solid #333;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+                background: #111;
+                display: none;
+            }
+
+            .dropdown-toggle:checked ~ .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                padding: 0.875rem 2.5rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #222;
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+        }
+        @media (min-width: 1024px) {
+            .menu-button,
+            .search-toggle-label {
+                display: none;
+            }
+
+            .search-container {
+                display: block !important;
+            }
+
+            .nav-links {
+                display: flex !important;
+            }
+
+            .nav-links > a {
+                padding: 0.5rem 0;
+                font-size: 0.95rem;
+                border-bottom: none;
+            }
+
+            .dropdown-content {
+                display: none;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        .dropdown-content,
+        .nav-links,
+        .dropdown-arrow {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .auto-parts {
+            padding-top: 90px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                            url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2072');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #D49A41;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-description {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-size: 1.2rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            color: #D49A41;
+        }
+
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .part-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .part-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .part-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .part-content {
+            padding: 25px;
+        }
+
+        .part-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .part-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #D49A41;
+        }
+
+        .part-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .part-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .part-features li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .part-features li::before {
+            content: '•';
+            color: #D49A41;
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 1200px) {
+            .parts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .parts-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .part-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="landingpage.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Penguin Logo">
+                    <span class="logo-text">Penguin Sales & Services Company</span>
+                </div>
+            </a>
+
+            <div class="nav-right">
+                <input type="checkbox" id="search-toggle" class="search-toggle">
+                <label for="search-toggle" class="search-toggle-label">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </label>
+
+                <div class="search-container">
+                    <input type="search" class="search-bar" placeholder="Search services..." aria-label="Search">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="menu-button" aria-label="Toggle menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M3 12h18M3 18h18"></path>
+                    </svg>
+                </label>
+
+                <div class="nav-links">
+                    <div class="dropdown">
+                        <span class="dropdown-trigger">
+                            Services
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="bridalCarsServices.html">Bridal Car Services</a>
+                            <a href="towingServices.html">Towing Services 24/7</a>
+                            <a href="truckingServices.html">Trucking Services</a>
+                            <a href="equipmenRental.html">Heavy Equipment Rental</a>
+                            <a href="contstructionServices.html">Construction & Maintenance</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <span class="dropdown-trigger active">
+                            Sales
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="furnitureSolutions.html">Furniture Hotel & Residential</a>
+                            <a href="autoparts.html" class="active">Auto Parts</a>
+                        </div>
+                    </div>
+
+                    <a href="landingpage.html#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="auto-parts">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Auto Parts</h1>
+                <p class="service-description">
+                    Quality auto parts for all makes and models. We offer a wide selection of genuine and aftermarket parts to keep your vehicle running at its best.
+                </p>
+                <div class="contact-info">
+                    Contact us for inquiries: (0923) 086 8342
+                </div>
+            </div>
+        </section>
+
+        <div class="parts-grid">
+            <div class="part-card">
+                <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2072" alt="Engine Parts" class="part-image">
+                <div class="part-content">
+                    <h3 class="part-title">Engine Parts</h3>
+                    <p class="part-description">Complete range of engine components for optimal performance.</p>
+                    <ul class="part-features">
+                        <li>Pistons & Rings</li>
+                        <li>Valves & Camshafts</li>
+                        <li>Engine Bearings</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="part-card">
+                <img src="https://frendioriginal.com/cdn/tenants/0/blog/30/brake-system-types-and-hydraulic-brake-parts-and-functions-3.png" alt="Brake Systems" class="part-image">
+                <div class="part-content">
+                    <h3 class="part-title">Brake Systems</h3>
+                    <p class="part-description">High-quality brake components for safe and reliable stopping power.</p>
+                    <ul class="part-features">
+                        <li>Brake Pads & Rotors</li>
+                        <li>Calipers & Lines</li>
+                        <li>Master Cylinders</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="part-card">
+                <img src="https://autoprotoway.com/wp-content/uploads/2024/01/function-of-car-suspension.jpg" alt="Suspension Parts" class="part-image">
+                <div class="part-content">
+                    <h3 class="part-title">Suspension Parts</h3>
+                    <p class="part-description">Complete suspension solutions for improved handling and comfort.</p>
+                    <ul class="part-features">
+                        <li>Shock Absorbers</li>
+                        <li>Struts & Springs</li>
+                        <li>Control Arms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="part-card">
+                <img src="https://zhyz14u8.cdn.imgeng.in/media/magefan_blog/TranspartsWarehouse-280889-performance-transmission-parts-image1.jpg" alt="Transmission Parts" class="part-image">
+                <div class="part-content">
+                    <h3 class="part-title">Transmission Parts</h3>
+                    <p class="part-description">Quality transmission components for smooth power delivery.</p>
+                    <ul class="part-features">
+                        <li>Clutch Kits</li>
+                        <li>Gearbox Components</li>
+                        <li>Transmission Filters</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="part-card">
+                <img src="https://www.swflelectric.com/wp-content/uploads/2022/08/electricalsystems.jpg" alt="Electrical Systems" class="part-image">
+                <div class="part-content">
+                    <h3 class="part-title">Electrical Systems</h3>
+                    <p class="part-description">Comprehensive range of electrical components and accessories.</p>
+                    <ul class="part-features">
+                        <li>Alternators & Starters</li>
+                        <li>Sensors & Switches</li>
+                        <li>Battery Systems</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="part-card">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2083" alt="Performance Parts" class="part-image">
+                <div class="part-content">
+                    <h3 class="part-title">Performance Parts</h3>
+                    <p class="part-description">Upgrade your vehicle's performance with our premium parts.</p>
+                    <ul class="part-features">
+                        <li>Turbochargers</li>
+                        <li>Performance Filters</li>
+                        <li>Exhaust Systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

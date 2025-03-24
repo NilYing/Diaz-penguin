@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Rental - Penguin Sales & Services</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+        }
+
+        /* Navbar styles */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-link:hover {
+            opacity: 0.9;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links > a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #333;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > a:hover {
+            color: #D49A41;
+            background-color: #111;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            display: none;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-arrow {
+            stroke: #D49A41;
+            transition: transform 0.3s ease;
+            min-width: 16px;
+        }
+
+        .dropdown:hover .dropdown-trigger {
+            color: #D49A41;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #000;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+            border: 1px solid #333;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #222;
+            color: #D49A41;
+        }
+
+        .search-container {
+            max-width: 250px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 1.5rem;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: white;
+            color: #000;
+        }
+
+        .search-bar::placeholder {
+            color: #666;
+        }
+
+        .search-bar:focus {
+            border-color: #D49A41;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+
+        .menu-button {
+            display: block;
+            background: none;
+            border: none;
+            padding: 0.8rem;
+            cursor: pointer;
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        .nav-toggle,
+        .search-toggle {
+            display: none;
+        }
+
+        .search-toggle-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .dropdown-trigger.active {
+            color: #D49A41;
+        }
+
+        .dropdown-content a.active {
+            color: #D49A41;
+            background-color: rgba(212, 154, 65, 0.1);
+            pointer-events: none;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 1023px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .nav-right {
+                gap: 0.5rem;
+            }
+
+            .search-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                background: #000;
+                border-top: 1px solid #333;
+            }
+
+            .search-toggle-label {
+                display: block;
+            }
+
+            .search-toggle:checked ~ .search-container {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: 0;
+                background: #000;
+                width: 280px;
+                height: calc(100vh - 72px);
+                padding: 1rem 0;
+                border-left: 1px solid #333;
+                border-radius: 0;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                align-items: stretch;
+                overflow-y: auto;
+            }
+
+            .nav-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
+            .nav-toggle:checked ~ .menu-button svg {
+                stroke: #D49A41;
+            }
+
+            .dropdown-trigger {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                border-bottom: 1px solid #333;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+                background: #111;
+                display: none;
+            }
+
+            .dropdown-toggle:checked ~ .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                padding: 0.875rem 2.5rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #222;
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+        }
+        @media (min-width: 1024px) {
+            .menu-button,
+            .search-toggle-label {
+                display: none;
+            }
+
+            .search-container {
+                display: block !important;
+            }
+
+            .nav-links {
+                display: flex !important;
+            }
+
+            .nav-links > a {
+                padding: 0.5rem 0;
+                font-size: 0.95rem;
+                border-bottom: none;
+            }
+
+            .dropdown-content {
+                display: none;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        .dropdown-content,
+        .nav-links,
+        .dropdown-arrow {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .equipment-rental {
+            padding-top: 90px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                            url('https://penguin.asia/wp-content/uploads/2021/08/FBD047EE-1EC1-4864-AD74-75A0C6E75058-1024x614.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #D49A41;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-info {
+            font-size: 1.8rem;
+            color: #D49A41;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .quotation-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        .form-title {
+            color: #D49A41;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #D49A41;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .gallery-item {
+            position: relative;
+        }
+
+        .gallery-item::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .contact-info {
+                font-size: 1.4rem;
+            }
+            .gallery {
+                padding: 20px;
+            }
+            .quotation-form {
+                margin: 20px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .submit-btn {
+            background-color: #D49A41;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #b88234;
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .form-message.success {
+            display: block;
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .form-message.error {
+            display: block;
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea {
+            border-color: #dc3545;
+        }
+
+        .form-group.success input,
+        .form-group.success textarea {
+            border-color: #28a745;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="landingpage.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Penguin Logo">
+                    <span class="logo-text">Penguin Sales & Services Company</span>
+                </div>
+            </a>
+
+            <div class="nav-right">
+                <input type="checkbox" id="search-toggle" class="search-toggle">
+                <label for="search-toggle" class="search-toggle-label">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </label>
+
+                <div class="search-container">
+                    <input type="search" class="search-bar" placeholder="Search services..." aria-label="Search">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="menu-button" aria-label="Toggle menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M3 12h18M3 18h18"></path>
+                    </svg>
+                </label>
+
+                <div class="nav-links">
+                    <div class="dropdown">
+                        <span class="dropdown-trigger active">
+                            Services
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="bridalCarsServices.html">Bridal Car Services</a>
+                            <a href="towingServices.html">Towing Services 24/7</a>
+                            <a href="truckingServices.html">Trucking Services</a>
+                            <a href="equipmentRental.html" class="active">Heavy Equipment Rental</a>
+                            <a href="contstructionServices.html">Construction & Maintenance</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <span class="dropdown-trigger">
+                            Sales
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="furnitureSolutions.html">Furniture Hotel & Residential</a>
+                            <a href="autoparts.html">Auto Parts</a>
+                        </div>
+                    </div>
+
+                    <a href="landingpage.html#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="equipment-rental">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Heavy Equipment Rental</h1>
+                <div class="contact-info">Contact us for proper quotation at (0923) 086 8342</div>
+                
+                <div class="quotation-form">
+                    <h2 class="form-title">Project Details Form</h2>
+                    <form id="projectDetailsForm">
+                        <div class="form-group">
+                            <label for="location">1. Location:</label>
+                            <input type="text" id="location" name="location" placeholder="Enter project location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="scope">2. Scope of work/project:</label>
+                            <textarea id="scope" name="scope" rows="4" placeholder="Describe your project scope" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="hours">3. Hours:</label>
+                            <input type="text" id="hours" name="hours" placeholder="Enter required hours" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
+                    <div id="formMessage" class="form-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://wastemanagementreview.com.au/wp-content/uploads/2021/03/kom.jpg" alt="Hydraulic Excavator">
+            </div>
+            <div class="gallery-item">
+                <img src="data:image/jpeg;base64,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" alt="Wheel Loader">
+            </div>
+            <div class="gallery-item">
+                <img src="https://duplomaticmotionsolutions.com/images/2020/buldozer_d144de81dc.jpg" alt="Bulldozer">
+            </div>
+            <div class="gallery-item">
+                <img src="https://www.maximcrane.com/wp-content/uploads/2023/02/Maxim-crane-rough-terrain-crane-main-blog-photo-scaled.jpg" alt="Mobile Crane">
+            </div>
+            <div class="gallery-item">
+                <img src="https://medatech.ca/wp-content/uploads/2023/05/heavy-duty-bev-trucks-scaled.jpg" alt="Heavy Duty Dump Truck">
+            </div>
+            <div class="gallery-item">
+                <img src="https://a-us.storyblok.com/f/1005140/87fa000ee0/backhoe-loaders-the-ultimate-guide-for-buyers-and-operators-featured-image.jpg" alt="Backhoe">
+            </div>
+        </div>
+    </main>
+    <script src="equipmentProjectdetailsForm.js"></script>
+</body>
+</html>

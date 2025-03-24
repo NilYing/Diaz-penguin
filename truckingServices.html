@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trucking Services - Penguin Sales & Services</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', sans-serif;
+        }
+
+        /* Navbar styles */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-link:hover {
+            opacity: 0.9;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links > a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #333;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > a:hover {
+            color: #D49A41;
+            background-color: #111;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            display: none;
+        }
+
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-arrow {
+            stroke: #D49A41;
+            transition: transform 0.3s ease;
+            min-width: 16px;
+        }
+
+        .dropdown:hover .dropdown-trigger {
+            color: #D49A41;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #000;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            z-index: 1001;
+            border: 1px solid #333;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            display: block;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #222;
+            color: #D49A41;
+        }
+
+        .search-container {
+            max-width: 250px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 1.5rem;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: white;
+            color: #000;
+        }
+
+        .search-bar::placeholder {
+            color: #666;
+        }
+
+        .search-bar:focus {
+            border-color: #D49A41;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+        }
+
+        .menu-button {
+            display: block;
+            background: none;
+            border: none;
+            padding: 0.8rem;
+            cursor: pointer;
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        .nav-toggle,
+        .search-toggle {
+            display: none;
+        }
+
+        .search-toggle-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Active states */
+        .dropdown-trigger.active {
+            color: #D49A41;
+        }
+
+        .dropdown-content a.active {
+            color: #D49A41;
+            background-color: rgba(212, 154, 65, 0.1);
+            pointer-events: none;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 1023px) {
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .nav-right {
+                gap: 0.5rem;
+            }
+
+            .search-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                background: #000;
+                border-top: 1px solid #333;
+            }
+
+            .search-toggle-label {
+                display: block;
+            }
+
+            .search-toggle:checked ~ .search-container {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: 0;
+                background: #000;
+                width: 280px;
+                height: calc(100vh - 72px);
+                padding: 1rem 0;
+                border-left: 1px solid #333;
+                border-radius: 0;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                align-items: stretch;
+                overflow-y: auto;
+            }
+
+            .nav-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
+            .nav-toggle:checked ~ .menu-button svg {
+                stroke: #D49A41;
+            }
+
+            .dropdown-trigger {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                border-bottom: 1px solid #333;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+                background: #111;
+                display: none;
+            }
+
+            .dropdown-toggle:checked ~ .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                padding: 0.875rem 2.5rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #222;
+            }
+
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+        }
+        @media (min-width: 1024px) {
+            .menu-button,
+            .search-toggle-label {
+                display: none;
+            }
+
+            .search-container {
+                display: block !important;
+            }
+
+            .nav-links {
+                display: flex !important;
+            }
+
+            .nav-links > a {
+                padding: 0.5rem 0;
+                font-size: 0.95rem;
+                border-bottom: none;
+            }
+
+            .dropdown-content {
+                display: none;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        .dropdown-content,
+        .nav-links,
+        .dropdown-arrow {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .trucking-services {
+            padding-top: 90px;
+            width: 100%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+            background-color: white;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                            url('https://penguin.asia/wp-content/uploads/2021/08/BE2AA1A5-DF28-4169-BFDF-AC874B09023C-1024x475.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #D49A41;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-info {
+            font-size: 1.8rem;
+            color: #D49A41;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-description {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .contact-info {
+                font-size: 1.4rem;
+            }
+            .service-description {
+                font-size: 1.2rem;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .hero-section {
+                padding: 60px 20px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="landingpage.html" class="logo-link">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Penguin Logo">
+                    <span class="logo-text">Penguin Sales & Services Company</span>
+                </div>
+            </a>
+
+            <div class="nav-right">
+                <input type="checkbox" id="search-toggle" class="search-toggle">
+                <label for="search-toggle" class="search-toggle-label">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </label>
+
+                <div class="search-container">
+                    <input type="search" class="search-bar" placeholder="Search services..." aria-label="Search">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="menu-button" aria-label="Toggle menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M3 12h18M3 18h18"></path>
+                    </svg>
+                </label>
+
+                <div class="nav-links">
+                    <div class="dropdown">
+                        <span class="dropdown-trigger active">
+                            Services
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="bridalCarsServices.html">Bridal Car Services</a>
+                            <a href="towingServices.html">Towing Services 24/7</a>
+                            <a href="truckingServices.html" class="active">Trucking Services</a>
+                            <a href="equipmenRental.html">Heavy Equipment Rental</a>
+                            <a href="contstructionServices.html">Construction & Maintenance</a>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <span class="dropdown-trigger">
+                            Sales
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </span>
+                        <div class="dropdown-content">
+                            <a href="furnitureSolutions.html">Furniture Hotel & Residential</a>
+                            <a href="autoparts.html">Auto Parts</a>
+                        </div>
+                    </div>
+
+                    <a href="landingpage.html#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="trucking-services">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Trucking Services</h1>
+                <div class="contact-info">Contact us for proper quotation at (0923) 086 8342</div>
+                <p class="service-description">
+                    We offer different trucking services.
+                </p>
+            </div>
+        </section>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://penguin.asia/wp-content/uploads/2021/08/BE2AA1A5-DF28-4169-BFDF-AC874B09023C-1024x475.png" alt="Trucking Service">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i1.wp.com/penguin.asia/wp-content/uploads/2021/08/4F236444-55EF-40A3-BE00-E36C00CBDCCF.jpeg?ssl=1" alt="Trucking Service">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i2.wp.com/penguin.asia/wp-content/uploads/2021/08/2B0232F6-18BA-4958-8994-890FA4529672.jpeg?ssl=1" alt="Trucking Service">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i2.wp.com/penguin.asia/wp-content/uploads/2021/08/F00BD04A-1733-4F00-A4A7-57BDE219DC2D.png?ssl=1" alt="Trucking Service">
+            </div>
+        </div>
+    </main>
+</body>
+</html>
