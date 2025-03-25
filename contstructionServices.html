@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Construction & Maintenance - Penguin Sales & Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
@@ -362,100 +363,6 @@
         .dropdown:hover .dropdown-arrow {
             transform: rotate(180deg);
         }
-
-        .construction-services {
-            padding-top: 90px;
-            width: 100%;
-            margin: 0 auto;
-            padding-bottom: 50px;
-        }
-
-        .hero-section {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                            url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #D49A41;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-description {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-size: 1.2rem;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .service-content {
-            padding: 20px;
-        }
-
-        .service-title {
-            color: #D49A41;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .service-text {
-            color: #666;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .service-description {
-                font-size: 1.1rem;
-            }
-            .services-grid {
-                padding: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -528,72 +435,72 @@
         </div>
     </nav>
 
-    <main class="construction-services">
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Construction & Maintenance Services</h1>
-                <p class="service-description">
+    <main class="construction-services pt-24 pb-12 mx-auto">
+        <section class="hero-section bg-cover bg-center text-white py-24 text-center mb-10" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop');">
+            <div class="hero-content max-w-5xl mx-auto">
+                <h1 class="hero-title text-5xl mb-5 text-yellow-600 shadow-lg">Construction & Maintenance Services</h1>
+                <p class="service-description max-w-2xl mx-auto leading-relaxed text-lg text-white shadow-md">
                     We provide comprehensive construction and maintenance solutions for residential, commercial, and industrial projects. Our experienced team ensures quality workmanship, timely completion, and professional service for all your construction needs.
                 </p>
             </div>
         </section>
 
-        <div class="services-grid">
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" alt="Building Construction">
-                <div class="service-content">
-                    <h3 class="service-title">Building Construction</h3>
-                    <p class="service-text">
+        <div class="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-10 max-w-7xl mx-auto">
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071&auto=format&fit=crop" alt="Building Construction" class="w-full h-64 object-cover">
+                <div class="service-content p-5">
+                    <h3 class="service-title text-yellow-600 text-xl mb-2">Building Construction</h3>
+                    <p class="service-text text-gray-600 leading-relaxed">
                         Complete building construction services including residential homes, commercial buildings, and industrial facilities. We handle everything from foundation to finishing touches.
                     </p>
                 </div>
             </div>
 
-            <div class="service-card">
-                <img src="https://daherconstructiononline.com/wp-content/uploads/2020/08/remodeling-contractors-e1597086045322.jpeg" alt="Renovation Services">
-                <div class="service-content">
-                    <h3 class="service-title">Renovation & Remodeling</h3>
-                    <p class="service-text">
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:-translate-y-2">
+                <img src="https://daherconstructiononline.com/wp-content/uploads/2020/08/remodeling-contractors-e1597086045322.jpeg" alt="Renovation Services" class="w-full h-64 object-cover">
+                <div class="service-content p-5">
+                    <h3 class="service-title text-yellow-600 text-xl mb-2">Renovation & Remodeling</h3>
+                    <p class="service-text text-gray-600 leading-relaxed">
                         Transform your existing space with our renovation services. We specialize in both residential and commercial remodeling projects, updating spaces to modern standards.
                     </p>
                 </div>
             </div>
 
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop" alt="Electrical Services">
-                <div class="service-content">
-                    <h3 class="service-title">Electrical Services</h3>
-                    <p class="service-text">
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop" alt="Electrical Services" class="w-full h-64 object-cover">
+                <div class="service-content p-5">
+                    <h3 class="service-title text-yellow-600 text-xl mb-2">Electrical Services</h3>
+                    <p class="service-text text-gray-600 leading-relaxed">
                         Professional electrical installation and maintenance services. From wiring to lighting systems, we ensure safe and efficient electrical solutions.
                     </p>
                 </div>
             </div>
 
-            <div class="service-card">
-                <img src="https://procrewschedule.com/wp-content/uploads/2020/06/plumber-at-work-in-a-bathroom-1024x683-1.jpg" alt="Plumbing Services">
-                <div class="service-content">
-                    <h3 class="service-title">Plumbing Solutions</h3>
-                    <p class="service-text">
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:-translate-y-2">
+                <img src="https://procrewschedule.com/wp-content/uploads/2020/06/plumber-at-work-in-a-bathroom-1024x683-1.jpg" alt="Plumbing Services" class="w-full h-64 object-cover">
+                <div class="service-content p-5">
+                    <h3 class="service-title text-yellow-600 text-xl mb-2">Plumbing Solutions</h3>
+                    <p class="service-text text-gray-600 leading-relaxed">
                         Complete plumbing services including installation, repair, and maintenance. We handle everything from pipe fitting to fixture installation.
                     </p>
                 </div>
             </div>
 
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop" alt="Interior Finishing">
-                <div class="service-content">
-                    <h3 class="service-title">Interior Finishing</h3>
-                    <p class="service-text">
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop" alt="Interior Finishing" class="w-full h-64 object-cover">
+                <div class="service-content p-5">
+                    <h3 class="service-title text-yellow-600 text-xl mb-2">Interior Finishing</h3>
+                    <p class="service-text text-gray-600 leading-relaxed">
                         Expert interior finishing services including painting, flooring, ceiling work, and custom carpentry for both residential and commercial spaces.
                     </p>
                 </div>
             </div>
 
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" alt="Maintenance Services">
-                <div class="service-content">
-                    <h3 class="service-title">Preventive Maintenance</h3>
-                    <p class="service-text">
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" alt="Maintenance Services" class="w-full h-64 object-cover">
+                <div class="service-content p-5">
+                    <h3 class="service-title text-yellow-600 text-xl mb-2">Preventive Maintenance</h3>
+                    <p class="service-text text-gray-600 leading-relaxed">
                         Regular maintenance services to keep your property in top condition. We offer scheduled maintenance plans for buildings and facilities.
                     </p>
                 </div>

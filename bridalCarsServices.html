@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bridal Car Services - Penguin Sales & Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
@@ -520,6 +521,37 @@
         .dropdown-arrow {
             transition: all 0.3s ease;
         }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -592,115 +624,163 @@
         </div>
     </nav>
 
-    <section class="bridal-hero">
+    <section class="min-h-[60vh] pt-32 pb-16 px-4 bg-black bg-opacity-50 bg-blend-overlay bg-[url('https://images.unsplash.com/photo-1525772764200-be829a350797?ixlib=rb-4.0.3')] bg-cover bg-center flex items-center justify-center text-center text-white animate-[fadeIn_1.5s_ease-out]">
         <div class="container">
-            <h1>Luxury Bridal Car Services</h1>
-            <p>Make your special day even more memorable</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 opacity-0 animate-[fadeInDown_1s_ease-out_0.5s_forwards]">
+                Luxury Bridal Car Services
+            </h1>
+            <p class="text-xl opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards]">
+                Make your special day even more memorable
+            </p>
+            
+            <a href="#cars" 
+               class="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-lg opacity-0 animate-[fadeInUp_1s_ease-out_1.5s_forwards] hover:bg-primary/90 transition-colors">
+                View Our Fleet
+            </a>
         </div>
     </section>
 
-    <section class="package-info">
-        <div class="package-container">
-            <h2 class="package-title">Our Premium Bridal Car Package</h2>
+    <section class="bg-white py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl text-center text-black mb-8">Our Premium Bridal Car Package</h2>
             
-            <div class="package-details">
-                <ul>
-                    <li>Bouquet of flowers</li>
-                    <li>VIP blinkers</li>
-                    <li>Driver in semi formal attire</li>
-                    <li>From hotel to ceremony</li>
-                    <li>From ceremony to reception</li>
-                    <li>First 3 hours rate</li>
-                    <li>Additional fee is applicable in excess of 3 hours</li>
+            <div class="bg-white p-8 rounded-xl shadow-xl mb-12">
+                <ul class="mb-6 space-y-2">
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">Bouquet of flowers</li>
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">VIP blinkers</li>
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">Driver in semi formal attire</li>
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">From hotel to ceremony</li>
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">From ceremony to reception</li>
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">First 3 hours rate</li>
+                    <li class="flex items-center gap-2 before:content-['•'] before:text-[#D49A41] before:text-2xl">Additional fee is applicable in excess of 3 hours</li>
                 </ul>
                 
-                <div class="price-tag">Starting at ₱4,000.00 for BMW E39</div>
+                <div class="text-2xl text-[#D49A41] font-semibold my-4">Starting at ₱4,000.00 for BMW E39</div>
                 
-                <div class="contact-info">
+                <div class="mt-6 p-4 border-2 border-[#D49A41] rounded-lg">
                     <p>For booking assistance, contact: <strong>(0923) 086 8342</strong></p>
-                    <p><small>Price is subject to change without prior notice.</small></p>
-                    <a href="https://www.facebook.com/tagaytaybridalcar/" class="social-link" target="_blank">
+                    <p class="text-sm mt-2">Price is subject to change without prior notice.</p>
+                    <a href="https://www.facebook.com/tagaytaybridalcar/" 
+                       class="inline-block mt-4 text-[#D49A41] font-medium hover:underline" 
+                       target="_blank">
                         Follow us on Facebook for more updates
                     </a>
                 </div>
             </div>
 
-            <h2 class="package-title">Our Bridal Car Fleet</h2>
-            <div class="cars-grid">
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="BMW E39" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">BMW E39</h3>
-                        <p class="car-description">Classic luxury sedan perfect for weddings</p>
-                        <p class="car-price">From ₱4,000.00</p>
+            <h2 class="text-4xl text-center text-black mb-8">Our Bridal Car Fleet</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=compress&q=80&w=800" 
+                         alt="BMW E39" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">BMW E39</h3>
+                        <p class="text-gray-600 text-sm mb-2">Classic luxury sedan perfect for weddings</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱4,000.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c" alt="Mercedes-Benz S-Class" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Mercedes-Benz S-Class</h3>
-                        <p class="car-description">Ultimate luxury and comfort</p>
-                        <p class="car-price">From ₱5,500.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=compress&q=80&w=800" 
+                         alt="Mercedes-Benz S-Class" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Mercedes-Benz S-Class</h3>
+                        <p class="text-gray-600 text-sm mb-2">Ultimate luxury and comfort</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱5,500.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a" alt="Chrysler 300C" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Chrysler 300C</h3>
-                        <p class="car-description">Bold and elegant American luxury</p>
-                        <p class="car-price">From ₱4,500.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=compress&q=80&w=800" 
+                         alt="Chrysler 300C" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Chrysler 300C</h3>
+                        <p class="text-gray-600 text-sm mb-2">Bold and elegant American luxury</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱4,500.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935" alt="Jaguar XJ" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Jaguar XJ</h3>
-                        <p class="car-description">British elegance and sophistication</p>
-                        <p class="car-price">From ₱5,000.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=compress&q=80&w=800" 
+                         alt="Jaguar XJ" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Jaguar XJ</h3>
+                        <p class="text-gray-600 text-sm mb-2">British elegance and sophistication</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱5,000.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938" alt="Audi A8" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Audi A8</h3>
-                        <p class="car-description">Modern luxury with cutting-edge technology</p>
-                        <p class="car-price">From ₱5,500.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938?auto=compress&q=80&w=800" 
+                         alt="Audi A8" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Audi A8</h3>
+                        <p class="text-gray-600 text-sm mb-2">Modern luxury with cutting-edge technology</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱5,500.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888" alt="Rolls-Royce Ghost" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Rolls-Royce Ghost</h3>
-                        <p class="car-description">The ultimate in wedding luxury</p>
-                        <p class="car-price">From ₱8,000.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=compress&q=80&w=800" 
+                         alt="Rolls-Royce Ghost" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Rolls-Royce Ghost</h3>
+                        <p class="text-gray-600 text-sm mb-2">The ultimate in wedding luxury</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱8,000.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" alt="Bentley Flying Spur" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Bentley Flying Spur</h3>
-                        <p class="car-description">Handcrafted luxury and performance</p>
-                        <p class="car-price">From ₱7,500.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=compress&q=80&w=800" 
+                         alt="Bentley Flying Spur" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Bentley Flying Spur</h3>
+                        <p class="text-gray-600 text-sm mb-2">Handcrafted luxury and performance</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱7,500.00</p>
                     </div>
                 </div>
 
-                <div class="car-card">
-                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8" alt="Mercedes-Benz E-Class" class="car-image">
-                    <div class="car-details">
-                        <h3 class="car-name">Mercedes-Benz E-Class</h3>
-                        <p class="car-description">Executive comfort and style</p>
-                        <p class="car-price">From ₱4,500.00</p>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=compress&q=80&w=800" 
+                         alt="Mercedes-Benz E-Class" 
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Mercedes-Benz E-Class</h3>
+                        <p class="text-gray-600 text-sm mb-2">Executive comfort and style</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱4,500.00</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl hover:border-[#D49A41]">
+                    <img src="https://images.unsplash.com/photo-1631295868223-63265b40d9e4?auto=compress&q=80&w=800" 
+                         alt="Lexus LS" 
+                         loading="lazy"
+                         class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-black mb-2">Lexus LS</h3>
+                        <p class="text-gray-600 text-sm mb-2">Japanese luxury and reliability</p>
+                        <p class="text-[#D49A41] font-semibold text-lg">From ₱5,000.00</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <footer class="footer" id="contact">
     </footer>
 </body>

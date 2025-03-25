@@ -632,7 +632,51 @@
         .dropdown-arrow {
             transition: all 0.3s ease;
         }
+
+        /* Add animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#D49A41',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <nav class="nav-container">
@@ -651,7 +695,7 @@
                     </svg>
                 </label>
 
-                <div class="search-container">
+            <div class="search-container">
                     <input type="search" class="search-bar" placeholder="Search services..." aria-label="Search">
                     <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -704,82 +748,83 @@
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Welcome to Penguin Sales & Services Company</h1>
-            <p>We Make It Happen.</p>
-            <a href="#features" class="cta-button">Get Started</a>
+    <section class="min-h-screen bg-black bg-opacity-60 bg-blend-overlay bg-fixed bg-center bg-cover py-32 px-4 flex items-center justify-center animate-[fadeIn_1s_ease-out]" 
+             style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight animate-[fadeInUp_1s_ease-out_0.3s] opacity-0 [animation-fill-mode:forwards]">Welcome to Penguin Sales & Services Company</h1>
+            <p class="text-2xl text-primary font-medium mb-10 max-w-2xl mx-auto animate-[fadeInUp_1s_ease-out_0.6s] opacity-0 [animation-fill-mode:forwards]">We Make It Happen.</p>
+            <a href="#features" class="inline-block px-12 py-5 bg-primary text-white font-semibold text-lg rounded-xl border-2 border-primary transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-primary/30 hover:bg-transparent animate-[fadeInUp_1s_ease-out_0.9s] opacity-0 [animation-fill-mode:forwards]">Get Started</a>
         </div>
     </section>
 
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Our Core Services</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>Bridal Car & Towing Services</h3>
-                    <p>Luxury bridal cars for your special day and 24/7 professional towing services for when you need emergency assistance.</p>
+    <section id="features" class="py-24 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 tracking-tight animate-[fadeInUp_1s_ease-out] opacity-0 [animation-fill-mode:forwards] [animation-delay:1.2s]">Our Core Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-10 rounded-2xl bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:border-primary cursor-pointer group animate-[scaleIn_1s_ease-out] opacity-0 [animation-fill-mode:forwards] [animation-delay:1.4s]">
+                    <h3 class="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors">Bridal Car & Towing Services</h3>
+                    <p class="text-gray-600 leading-relaxed">Luxury bridal cars for your special day and 24/7 professional towing services for when you need emergency assistance.</p>
                 </div>
 
-                <div class="feature-card">
-                    <h3>Construction & Equipment</h3>
-                    <p>Complete construction solutions including heavy equipment rental, general construction, and maintenance services.</p>
+                <div class="p-10 rounded-2xl bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:border-primary cursor-pointer group animate-[scaleIn_1s_ease-out] opacity-0 [animation-fill-mode:forwards] [animation-delay:1.6s]">
+                    <h3 class="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors">Construction & Equipment</h3>
+                    <p class="text-gray-600 leading-relaxed">Complete construction solutions including heavy equipment rental, general construction, and maintenance services.</p>
                 </div>
 
-                <div class="feature-card">
-                    <h3>Furniture & Auto Solutions</h3>
-                    <p>Quality furniture supply for hotels and residential properties, plus comprehensive auto parts services.</p>
+                <div class="p-10 rounded-2xl bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:border-primary cursor-pointer group animate-[scaleIn_1s_ease-out] opacity-0 [animation-fill-mode:forwards] [animation-delay:1.8s]">
+                    <h3 class="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors">Furniture & Auto Solutions</h3>
+                    <p class="text-gray-600 leading-relaxed">Quality furniture supply for hotels and residential properties, plus comprehensive auto parts services.</p>
                 </div>
-            </div>
-        </div>
+                </div>
+                </div>
     </section>
 
-    <footer class="footer" id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 class="footer-title">Contact Information</h3>
-                <div class="contact-info">
-                    <a href="mailto:info.qpssco@gmail.com" class="contact-item">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <footer class="bg-black text-white py-16 px-4 animate-[fadeIn_1s_ease-out] opacity-0 [animation-fill-mode:forwards] [animation-delay:2s]" id="contact">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-2xl font-semibold text-primary mb-6">Contact Information</h3>
+                <div class="flex flex-col gap-5">
+                    <a href="mailto:info.qpssco@gmail.com" class="flex items-center gap-4 text-white hover:text-primary transition-colors">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                         info.qpssco@gmail.com
                     </a>
-                    <a href="tel:09255510987" class="contact-item">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    <a href="tel:09255510987" class="flex items-center gap-4 text-white hover:text-primary transition-colors">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
                         Mobile: (0925) 551 0987
                     </a>
-                    <a href="tel:0462301426" class="contact-item">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="tel:0462301426" class="flex items-center gap-4 text-white hover:text-primary transition-colors">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
                         Landline: (046) 230 1426
                     </a>
                 </div>
-            </div>
+                </div>
 
-            <div class="footer-section">
-                <h3 class="footer-title">Follow Us</h3>
-                <div class="social-links">
-                    <a href="#" class="social-link" target="_blank">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div>
+                <h3 class="text-2xl font-semibold text-primary mb-6">Follow Us</h3>
+                <div class="flex flex-col gap-5">
+                    <a href="#" class="flex items-center gap-4 text-white hover:text-primary transition-colors" target="_blank">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                         </svg>
                         Penguin Sales & Services Company
                     </a>
-                    <a href="#" class="social-link" target="_blank">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="#" class="flex items-center gap-4 text-white hover:text-primary transition-colors" target="_blank">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                         </svg>
                         Follow us on Instagram
                     </a>
-                    <a href="#" class="social-link" target="_blank">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="#" class="flex items-center gap-4 text-white hover:text-primary transition-colors" target="_blank">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
                         </svg>
                         Follow us on Twitter
@@ -788,7 +833,7 @@
             </div>
         </div>
 
-        <div class="footer-bottom">
+        <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
             <p>&copy; 2025 Penguin Sales & Services Company. All rights reserved.</p>
         </div>
     </footer>

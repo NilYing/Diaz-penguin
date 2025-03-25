@@ -14,7 +14,6 @@
             font-family: 'SF Pro Display', sans-serif;
         }
 
-        /* Navbar styles */
         .nav-container {
             position: fixed;
             top: 0;
@@ -222,7 +221,6 @@
             padding: 0.5rem;
         }
 
-        /* Active states */
         .dropdown-trigger.active {
             color: #D49A41;
         }
@@ -233,7 +231,6 @@
             pointer-events: none;
         }
 
-        /* Mobile styles */
         @media (max-width: 1023px) {
             .logo-text {
                 font-size: 1rem;
@@ -320,6 +317,7 @@
                 border-bottom: none;
             }
         }
+
         @media (min-width: 1024px) {
             .menu-button,
             .search-toggle-label {
@@ -355,122 +353,60 @@
             transition: all 0.3s ease;
         }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .trucking-services {
-            padding-top: 90px;
-            width: 100%;
-            margin: 0 auto;
-            padding-bottom: 50px;
-            background-color: white;
-        }
-
-        .hero-section {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                            url('https://penguin.asia/wp-content/uploads/2021/08/BE2AA1A5-DF28-4169-BFDF-AC874B09023C-1024x475.png');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #D49A41;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .contact-info {
-            font-size: 1.8rem;
-            color: #D49A41;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-description {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.4rem;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: white;
-        }
-
-        .gallery-item {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-            .contact-info {
-                font-size: 1.4rem;
-            }
-            .service-description {
-                font-size: 1.2rem;
-            }
-            .gallery {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-            .hero-section {
-                padding: 60px 20px;
+            to {
+                opacity: 1;
             }
         }
 
-        html {
-            scroll-behavior: smooth;
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#D49A41',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <nav class="nav-container">
@@ -542,29 +478,110 @@
         </div>
     </nav>
 
-    <main class="trucking-services">
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Trucking Services</h1>
-                <div class="contact-info">Contact us for proper quotation at (0923) 086 8342</div>
-                <p class="service-description">
+    <main class="pt-[90px] w-full mx-auto pb-12 bg-white">
+        <section class="relative py-24 px-5 text-center mb-10 bg-black/70 bg-blend-overlay bg-[url('https://penguin.asia/wp-content/uploads/2021/08/BE2AA1A5-DF28-4169-BFDF-AC874B09023C-1024x475.png')] bg-cover bg-center animate-[fadeIn_1.5s_ease-out]">
+            <div class="relative z-10 max-w-6xl mx-auto">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-5 drop-shadow-lg opacity-0 animate-[slideInDown_1s_ease-out_0.5s_forwards]">
+                    Trucking Services
+                </h1>
+                <div class="text-xl md:text-2xl text-primary mb-8 drop-shadow-md opacity-0 animate-[slideInUp_1s_ease-out_0.8s_forwards]">
+                    Contact us for proper quotation at (0923) 086 8342
+                </div>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-white leading-relaxed drop-shadow-md px-5 opacity-0 animate-[slideInUp_1s_ease-out_1.1s_forwards]">
                     We offer different trucking services.
                 </p>
             </div>
         </section>
 
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://penguin.asia/wp-content/uploads/2021/08/BE2AA1A5-DF28-4169-BFDF-AC874B09023C-1024x475.png" alt="Trucking Service">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-10 max-w-6xl mx-auto">
+            <div class="group rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2.5 transition-all duration-300 hover:shadow-xl bg-white opacity-0 animate-[scaleIn_0.6s_ease-out_1.4s_forwards]">
+                <div class="overflow-hidden">
+                    <img 
+                        src="https://penguin.asia/wp-content/uploads/2021/08/BE2AA1A5-DF28-4169-BFDF-AC874B09023C-1024x475.png" 
+                        alt="Wing Van Truck"
+                        class="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    >
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Wing Van Truck</h3>
+                    <p class="text-gray-600 mb-3">Perfect for large volume cargo transportation. Ideal for sensitive goods that need protection from weather conditions.</p>
+                    <p class="text-primary font-medium">Capacity: Up to 4 tons</p>
+                </div>
             </div>
-            <div class="gallery-item">
-                <img src="https://i1.wp.com/penguin.asia/wp-content/uploads/2021/08/4F236444-55EF-40A3-BE00-E36C00CBDCCF.jpeg?ssl=1" alt="Trucking Service">
+
+            <div class="group rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2.5 transition-all duration-300 hover:shadow-xl bg-white opacity-0 animate-[scaleIn_0.6s_ease-out_1.6s_forwards]">
+                <div class="overflow-hidden">
+                    <img 
+                        src="https://i1.wp.com/penguin.asia/wp-content/uploads/2021/08/4F236444-55EF-40A3-BE00-E36C00CBDCCF.jpeg?ssl=1" 
+                        alt="Closed Van"
+                        class="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    >
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Closed Van</h3>
+                    <p class="text-gray-600 mb-3">Secure and weatherproof transportation solution. Excellent for retail deliveries and commercial goods.</p>
+                    <p class="text-primary font-medium">Capacity: 2-3 tons</p>
+                </div>
             </div>
-            <div class="gallery-item">
-                <img src="https://i2.wp.com/penguin.asia/wp-content/uploads/2021/08/2B0232F6-18BA-4958-8994-890FA4529672.jpeg?ssl=1" alt="Trucking Service">
+
+            <div class="group rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2.5 transition-all duration-300 hover:shadow-xl bg-white opacity-0 animate-[scaleIn_0.6s_ease-out_1.8s_forwards]">
+                <div class="overflow-hidden">
+                    <img 
+                        src="https://i2.wp.com/penguin.asia/wp-content/uploads/2021/08/2B0232F6-18BA-4958-8994-890FA4529672.jpeg?ssl=1" 
+                        alt="Cargo Truck"
+                        class="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    >
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Cargo Truck</h3>
+                    <p class="text-gray-600 mb-3">Versatile transportation for various cargo types. Suitable for construction materials and bulk items.</p>
+                    <p class="text-primary font-medium">Capacity: Up to 6 tons</p>
+                </div>
             </div>
-            <div class="gallery-item">
-                <img src="https://i2.wp.com/penguin.asia/wp-content/uploads/2021/08/F00BD04A-1733-4F00-A4A7-57BDE219DC2D.png?ssl=1" alt="Trucking Service">
+
+            <div class="group rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2.5 transition-all duration-300 hover:shadow-xl bg-white opacity-0 animate-[scaleIn_0.6s_ease-out_2.0s_forwards]">
+                <div class="overflow-hidden">
+                    <img 
+                        src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                        alt="Heavy Duty Truck"
+                        class="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    >
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Heavy Duty Truck</h3>
+                    <p class="text-gray-600 mb-3">Powerful hauling solution for industrial loads. Ideal for long-distance freight and heavy machinery transport.</p>
+                    <p class="text-primary font-medium">Capacity: 8-10 tons</p>
+                </div>
+            </div>
+
+            <div class="group rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2.5 transition-all duration-300 hover:shadow-xl bg-white opacity-0 animate-[scaleIn_0.6s_ease-out_2.2s_forwards]">
+                <div class="overflow-hidden">
+                    <img 
+                        src="https://lh4.googleusercontent.com/proxy/lUow0-69Qt7GvbxOinPBpFuIwbeeR6sJwL2YyDdWpp6XUCZCGhMXrjMTrozhWN2beu1peeIdwXDi_aBMH0YQmFCD_ZAuZc-RRAM" 
+                        alt="Container Truck"
+                        class="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    >
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Container Truck</h3>
+                    <p class="text-gray-600 mb-3">Specialized for container transport. Perfect for port operations and international shipping logistics.</p>
+                    <p class="text-primary font-medium">Capacity: 20-40ft containers</p>
+                </div>
+            </div>
+
+            <div class="group rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2.5 transition-all duration-300 hover:shadow-xl bg-white opacity-0 animate-[scaleIn_0.6s_ease-out_2.4s_forwards]">
+                <div class="overflow-hidden">
+                    <img 
+                        src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                        alt="Transport Truck"
+                        class="w-full h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    >
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Transport Truck</h3>
+                    <p class="text-gray-600 mb-3">Multi-purpose transport solution. Adaptable for various cargo types and delivery requirements.</p>
+                    <p class="text-primary font-medium">Capacity: 4-6 tons</p>
+                </div>
             </div>
         </div>
     </main>

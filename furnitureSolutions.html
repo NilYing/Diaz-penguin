@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Furniture Solutions - Penguin Sales & Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
@@ -487,6 +488,21 @@
                 height: 300px;
             }
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -559,62 +575,74 @@
         </div>
     </nav>
 
-    <main class="furniture-solutions">
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Furniture Hotel and Residential Solutions</h1>
-                <p class="service-description">
+    <main class="pt-24 pb-12">
+        <section class="bg-cover bg-center text-white text-center py-24 mb-10 fade-in" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2100');">
+            <div class="max-w-5xl mx-auto">
+                <h1 class="text-5xl mb-5 text-yellow-500">Furniture Hotel and Residential Solutions</h1>
+                <p class="max-w-2xl mx-auto leading-relaxed text-lg">
                     Discover our premium collection of hotel and residential furniture. We offer elegant, durable, and customizable furniture solutions that blend style with functionality for both commercial and residential spaces.
                 </p>
             </div>
         </section>
 
-        <div class="furniture-grid">
-            <div class="furniture-card">
-                <img src="https://images.unsplash.com/photo-1540638349517-3abd5afc5847?q=80&w=2071" alt="Luxury Hotel Suite" class="furniture-image">
-                <div class="furniture-overlay">
-                    <h3 class="furniture-title">Hotel Suites</h3>
-                    <p class="furniture-description">Complete furniture solutions for luxury hotel rooms and suites, featuring premium beds, elegant seating, and sophisticated storage options.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-5 lg:px-20">
+            <div class="relative rounded-lg overflow-hidden shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1540638349517-3abd5afc5847?q=80&w=2071" alt="Luxury Hotel Suite" class="w-full h-80 object-cover transition-transform transform hover:scale-105">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-5 text-white transition-transform transform translate-y-full hover:translate-y-0">
+                    <h3 class="text-xl mb-2 text-yellow-500">Hotel Suites</h3>
+                    <p class="text-base leading-relaxed opacity-0 transform translate-y-5 transition-all duration-300 delay-100 hover:opacity-100 hover:translate-y-0">
+                        Complete furniture solutions for luxury hotel rooms and suites, featuring premium beds, elegant seating, and sophisticated storage options.
+                    </p>
                 </div>
             </div>
 
-            <div class="furniture-card">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2072" alt="Modern Living Room" class="furniture-image">
-                <div class="furniture-overlay">
-                    <h3 class="furniture-title">Living Spaces</h3>
-                    <p class="furniture-description">Contemporary living room furniture sets that combine comfort with style, perfect for modern residential spaces.</p>
+            <div class="relative rounded-lg overflow-hidden shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2072" alt="Modern Living Room" class="w-full h-80 object-cover transition-transform transform hover:scale-105">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-5 text-white transition-transform transform translate-y-full hover:translate-y-0">
+                    <h3 class="text-xl mb-2 text-yellow-500">Living Spaces</h3>
+                    <p class="text-base leading-relaxed opacity-0 transform translate-y-5 transition-all duration-300 delay-100 hover:opacity-100 hover:translate-y-0">
+                        Contemporary living room furniture sets that combine comfort with style, perfect for modern residential spaces.
+                    </p>
                 </div>
             </div>
 
-            <div class="furniture-card">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070" alt="Hotel Lobby" class="furniture-image">
-                <div class="furniture-overlay">
-                    <h3 class="furniture-title">Lobby Furniture</h3>
-                    <p class="furniture-description">Impressive lobby and reception area furniture designed to create memorable first impressions.</p>
+            <div class="relative rounded-lg overflow-hidden shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070" alt="Hotel Lobby" class="w-full h-80 object-cover transition-transform transform hover:scale-105">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-5 text-white transition-transform transform translate-y-full hover:translate-y-0">
+                    <h3 class="text-xl mb-2 text-yellow-500">Lobby Furniture</h3>
+                    <p class="text-base leading-relaxed opacity-0 transform translate-y-5 transition-all duration-300 delay-100 hover:opacity-100 hover:translate-y-0">
+                        Impressive lobby and reception area furniture designed to create memorable first impressions.
+                    </p>
                 </div>
             </div>
 
-            <div class="furniture-card">
-                <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=2070" alt="Dining Room" class="furniture-image">
-                <div class="furniture-overlay">
-                    <h3 class="furniture-title">Dining Collections</h3>
-                    <p class="furniture-description">Elegant dining sets and restaurant furniture that combine functionality with sophisticated design.</p>
+            <div class="relative rounded-lg overflow-hidden shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=2070" alt="Dining Room" class="w-full h-80 object-cover transition-transform transform hover:scale-105">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-5 text-white transition-transform transform translate-y-full hover:translate-y-0">
+                    <h3 class="text-xl mb-2 text-yellow-500">Dining Collections</h3>
+                    <p class="text-base leading-relaxed opacity-0 transform translate-y-5 transition-all duration-300 delay-100 hover:opacity-100 hover:translate-y-0">
+                        Elegant dining sets and restaurant furniture that combine functionality with sophisticated design.
+                    </p>
                 </div>
             </div>
 
-            <div class="furniture-card">
-                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070" alt="Office Space" class="furniture-image">
-                <div class="furniture-overlay">
-                    <h3 class="furniture-title">Office Solutions</h3>
-                    <p class="furniture-description">Professional office furniture designed for productivity and comfort in modern workspaces.</p>
+            <div class="relative rounded-lg overflow-hidden shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070" alt="Office Space" class="w-full h-80 object-cover transition-transform transform hover:scale-105">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-5 text-white transition-transform transform translate-y-full hover:translate-y-0">
+                    <h3 class="text-xl mb-2 text-yellow-500">Office Solutions</h3>
+                    <p class="text-base leading-relaxed opacity-0 transform translate-y-5 transition-all duration-300 delay-100 hover:opacity-100 hover:translate-y-0">
+                        Professional office furniture designed for productivity and comfort in modern workspaces.
+                    </p>
                 </div>
             </div>
 
-            <div class="furniture-card">
-                <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=2070" alt="Custom Furniture" class="furniture-image">
-                <div class="furniture-overlay">
-                    <h3 class="furniture-title">Custom Designs</h3>
-                    <p class="furniture-description">Bespoke furniture solutions tailored to your specific needs and design preferences.</p>
+            <div class="relative rounded-lg overflow-hidden shadow-lg transition-transform transform hover:-translate-y-2">
+                <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?q=80&w=2070" alt="Custom Furniture" class="w-full h-80 object-cover transition-transform transform hover:scale-105">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-5 text-white transition-transform transform translate-y-full hover:translate-y-0">
+                    <h3 class="text-xl mb-2 text-yellow-500">Custom Designs</h3>
+                    <p class="text-base leading-relaxed opacity-0 transform translate-y-5 transition-all duration-300 delay-100 hover:opacity-100 hover:translate-y-0">
+                        Bespoke furniture solutions tailored to your specific needs and design preferences.
+                    </p>
                 </div>
             </div>
         </div>
